@@ -50,8 +50,8 @@ public:
     using Iterator = VectorIterator<AMVector<T>>;
 */
 private:
-	int Size,Capacity;
-	T *Data;
+    int Size,Capacity;
+    T *Data;
 public:
     int getSize(){
         return Size;
@@ -105,39 +105,39 @@ public:
     }
     //--------------------------------- move assignment
     AMVector& operator=(AMVector&& other) noexcept{
-       cout<<endl<<"move"<<endl;
-       if (this != &other)
-       {
-          // Free the existing resource.
-          delete[] Data;
+        cout<<endl<<"move"<<endl;
+        if (this != &other)
+        {
+            // Free the existing resource.
+            delete[] Data;
 
-          // Copy the data pointer and its length from the
-          // source object.
-          Data = other.Data;
-          Capacity = other.Capacity;
-          Size = other.Size;
+            // Copy the data pointer and its length from the
+            // source object.
+            Data = other.Data;
+            Capacity = other.Capacity;
+            Size = other.Size;
 
-          // Release the data pointer from the source object so that
-          // the destructor does not free the memory multiple times.
-          other.Data = nullptr;
-          other.Capacity = 0;
-          other.Size = 0;
-       }
-       return *this;
+            // Release the data pointer from the source object so that
+            // the destructor does not free the memory multiple times.
+            other.Data = nullptr;
+            other.Capacity = 0;
+            other.Size = 0;
+        }
+        return *this;
     }
     //---------------------------------- operator[]
     T& operator[](int index){
         if(index > Size-1){
-                cout << "Error, index out of range." << endl;
-                exit(0);
+            cout << "Error, index out of range." << endl;
+            exit(0);
         }
         return Data[index];
     }
     //------------------------------- push_back
     int push_back(const T& element){
         if(Size < Capacity){
-                Data[Size++] = element;
-            }
+            Data[Size++] = element;
+        }
         else{
             T* nData = new T[Capacity*2];
             Capacity *= 2;
@@ -184,7 +184,7 @@ public:
         else{
             for(int i = 0;i < Size;i++){
                 return
-                Data[i] == other.Data[i]?true : false;
+                        Data[i] == other.Data[i]?true : false;
             }
         }
     }
@@ -223,7 +223,7 @@ public:
     //----------------------------- empty
     bool empty(){
         return
-            Size?false:true;
+                Size?false:true;
     }
     //----------------------------- operator <<
     friend ostream& operator << (ostream& out,const AMVector<T>& obj){
@@ -253,3 +253,15 @@ main(){
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
