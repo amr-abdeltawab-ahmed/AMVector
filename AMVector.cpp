@@ -251,6 +251,61 @@ public:
         return iterator(data + size);
     }
 
+//Erase functions
+    AMVector<T>::iterator erase(iterator pos) {
+        int counter = 0,counter2 = 0;
+        T*data_temp = new T[capacity];
+        for(int i = 0;i < size; i++){
+            if(counter2 == 0 && data[i] == *pos){
+                counter2++;
+                continue;
+            }
+            else{
+                data_temp[counter] = data[i];
+                counter++;
+            }
+        }
+        delete[]data;
+        size--;
+        T* data = new T[capacity];
+        for(int i = 0;i < size; i++)
+            data[i] = data_temp[i];
+
+        delete[] data_temp;
+
+    }
+
+    AMVector<T>::iterator erase(iterator first, iterator last){
+        int counter=0,pos_first,pos_end;
+        T* data_temp = new T[size];
+
+        for(int i = 0;i < size ;i++){
+            if(data[i] == *first){
+                cout << *last << "   This is first   \n";
+                pos_first = i;
+            }
+            else if(data[i] == *last){
+                cout << *last << "   This is last   \n";
+                pos_end = i;
+            }
+        }
+
+        for(int i = 0; i < size; i++){
+            if(i < pos_first || i > pos_end){
+                data_temp[counter] = data[i];
+                counter++;
+            }
+        }
+
+        delete[] data;
+        size = counter;
+        T* data = new T[size];
+        for(int i = 0;i < size; i++){
+            data[i] = data_temp[i];
+        }
+        delete [] data_temp;
+
+    }
 
 
 
