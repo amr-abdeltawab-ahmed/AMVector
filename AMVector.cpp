@@ -233,7 +233,6 @@ public:
             return temp;
         }
 
-
         iterator begin() const;
         iterator end() const;
 
@@ -243,7 +242,16 @@ public:
     };
 
 
-    
+    // return begin iterator
+    AMVector<T>::iterator begin() const {
+        return iterator(data);
+    }
+    // return class to return end iterator
+    AMVector<T>::iterator end() const {
+        return iterator(data + size);
+    }
+
+
 
 
 };
