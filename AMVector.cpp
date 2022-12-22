@@ -126,6 +126,11 @@ public:
             data[size++] = item;
         }
     }
+    void clear(){
+        delete[] data;
+        size = 0;
+        capacity =0;
+    }
     T pop_back(){
         if (size > 0)  {
             return data[size-- - 1];
