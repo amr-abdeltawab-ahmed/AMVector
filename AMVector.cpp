@@ -149,9 +149,15 @@ public:
         return false;
     }
     void resize(){
+        T* newdata = new T[capacity*2];
         capacity *= 2;
+        for(int i = 0; i < size; i++){
+            newdata[i] = data[i];
+        }
+        delete[] data;
+        data = newdata;
+        newdata = nullptr;
     }
-
     // Comparison operations
     bool operator==(const AMVector<T>& other){
         if (size == other.getSize()) {
@@ -165,7 +171,6 @@ public:
             return false;
         }
     }
-
     bool operator< (const AMVector<T>& other){
         int smaller_size;
         if (size < other.getSize()){
@@ -181,7 +186,6 @@ public:
         }
         return size < other.getSize();
     }
-
     bool operator> (const AMVector<T>& other){
         if (other > data){
             return true;
@@ -190,7 +194,6 @@ public:
             return false;
         }
     }
-
     //----------------------------------------- Iterator ---------------------------------------//
     class iterator {
     private:
@@ -240,8 +243,6 @@ public:
         iterator erase(iterator first, iterator last);
 
     };
-
-
     // return begin iterator
     AMVector<T>::iterator begin() const {
         return iterator(data);
@@ -250,8 +251,7 @@ public:
     AMVector<T>::iterator end() const {
         return iterator(data + size);
     }
-
-//Erase functions
+    //Erase functions
     AMVector<T>::iterator erase(iterator pos) {
         int counter = 0,counter2 = 0;
         T*data_temp = new T[capacity];
@@ -274,7 +274,6 @@ public:
         delete[] data_temp;
 
     }
-
     AMVector<T>::iterator erase(iterator first, iterator last){
         int counter=0,pos_first,pos_end;
         T* data_temp = new T[size];
@@ -289,14 +288,12 @@ public:
                 pos_end = i;
             }
         }
-
         for(int i = 0; i < size; i++){
             if(i < pos_first || i > pos_end){
                 data_temp[counter] = data[i];
                 counter++;
             }
         }
-
         delete[] data;
         size = counter;
         T* data = new T[size];
@@ -304,12 +301,51 @@ public:
             data[i] = data_temp[i];
         }
         delete [] data_temp;
+    }
+};
 
+
+
+
+int main(){
+    AMVector <string> vec(10);
+    vec.push_back((string) "Hello");
+    vec.push_back((string) "Neehaw");
+    vec.push_back((string) "Bonjour");
+    vec.push_back((string) "Guten Tag");
+    vec.push_back((string) "Salam Alykum");
+    vec.push_back((string) "Hola");
+
+    cout << "This is vec1" << endl;
+    for(int i = 0; i < vec.getSize(); i++){
+        cout << vec[i] << endl;
+    }
+
+    cout << endl << endl;
+    AMVector <string> vec2;
+    vec2 = vec;
+    vec2[0] = "Salam Alykum231";
+
+    cout << "This is vec2" << endl;
+    for(int i = 0; i < vec2.getSize(); i++){
+        cout << vec2[i] << endl;
+    }
+
+    vec.erase(vec.begin(),vec.end());
+    cout << "This is vec1 After Erase:" << endl;
+    for(int i = 0; i < vec.getSize(); i++){
+        cout << vec[i] << endl;
+    }
+
+    cout << "This is vec3" << endl;
+    int arr[2] = {1,2};
+    AMVector <int> vec3(arr,2);
+    for(int i = 0; i < vec3.getSize(); i++){
+        cout << endl << vec3[i] <<endl;
     }
 
 
-
-};
+}
 
 
 
