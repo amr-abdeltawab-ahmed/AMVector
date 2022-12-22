@@ -135,6 +135,63 @@ public:
         }
     }
 
+    // Capacity operations
+    int getSize() const{
+        return size;
+    }
+    int get_capacity() const {
+        return capacity;
+    }
+    bool empty(){
+        if (size == 0){
+            return true;
+        }
+        return false;
+    }
+    void resize(){
+        capacity *= 2;
+    }
+
+    // Comparison operations
+    bool operator==(const AMVector<T>& other){
+        if (size == other.getSize()) {
+            for (int i = 0; i < size; i ++)
+                if (data[i] != other[i]){
+                    return false;
+                }
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    bool operator< (const AMVector<T>& other){
+        int smaller_size;
+        if (size < other.getSize()){
+            smaller_size = size;
+        }
+        else {
+            smaller_size = other.getSize();
+        }
+        for (int i = 0; i < smaller_size; i++){
+            if (data[i] != other[i]){ // Find the first mismatching element
+                return data[i] < other[i];
+            }
+        }
+        return size < other.getSize();
+    }
+
+    bool operator> (const AMVector<T>& other){
+        if (other > data){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
 
 
 
