@@ -302,10 +302,19 @@ public:
         }
         delete [] data_temp;
     }
+
+    friend ostream &operator << (ostream &out, AMVector<T> obj);
+
 };
 
-
-
+// operator << overloading function.
+template <class T>
+ostream &operator << (ostream &out, AMVector<T> obj){
+    for(int i = 0; i < obj.getSize(); i++){
+        out << obj.data[i] << endl;
+    }
+    return out;
+}
 
 int main(){
     AMVector <string> vec(10);
@@ -330,6 +339,9 @@ int main(){
     for(int i = 0; i < vec2.getSize(); i++){
         cout << vec2[i] << endl;
     }
+
+    cout << "This is vec2 with frrrrr" << endl;
+    cout << vec2 << endl;
 
     vec.erase(vec.begin(),vec.end());
     cout << "This is vec1 After Erase:" << endl;
