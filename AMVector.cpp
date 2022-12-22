@@ -191,8 +191,59 @@ public:
         }
     }
 
+    //----------------------------------------- Iterator ---------------------------------------//
+    class iterator {
+    private:
+        T* ptr;
+    public:
+        explicit iterator() : ptr(nullptr){}
+        explicit iterator(T* p): ptr(p){}
+
+        bool operator==(const iterator& obj) {
+            return ptr == obj.ptr;
+        }
+
+        bool operator!= (const iterator &obj) {
+            return !(*this == obj);
+        }
+
+        T operator*() const{
+            return *ptr;
+        }
+
+        iterator& operator++(){
+            ++ptr;
+            return *this;
+        }
+
+        iterator& operator--(){
+            --ptr;
+            return *this;
+        }
+
+        iterator operator++(int){
+            iterator temp(*this);
+            ++*this;
+            return temp;
+        }
+
+        iterator operator--(int){
+            iterator temp(*this);
+            --*this;
+            return temp;
+        }
 
 
+        iterator begin() const;
+        iterator end() const;
+
+        iterator erase(iterator pos);
+        iterator erase(iterator first, iterator last);
+
+    };
+
+
+    
 
 
 };
